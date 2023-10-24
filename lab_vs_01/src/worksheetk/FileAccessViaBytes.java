@@ -25,27 +25,32 @@ public class FileAccessViaBytes {
 	}
 
 	public String readNBytes(int n) throws Exception {
-        byte[] buffer = new byte[n];
-        
-        String s = "";
-        
-        try {
-            int bytesRead = in.read(buffer);
-            
-            // System.out.println("Read " + bytesRead + " bytes.");
-            if (bytesRead != -1) {
-                s = new String(buffer, StandardCharsets.UTF_8);
-                // System.out.println("Length of string: " + s.length());
-            } else {
-            	throw new Exception("EOF");
-            }
-        } catch (IOException e) {
-            System.out.println("Datei ist defekt");
-            close();
-        }
-        
-        return s;
-    }
+	    byte[] buffer = new byte[n];
+
+	    String s = "";
+
+	    boolean shouldContinue = true; // Initialize the boolean variable
+
+	    while (shouldContinue) { // Use the boolean variable as the loop condition
+	        try {
+	            int bytesRead = in.read(buffer);
+
+	            if (bytesRead != -1) {
+	                s = new String(buffer, StandardCharsets.UTF_8);
+	            } else {
+	                throw new Exception("EOF");
+	            }
+	            
+	            shouldContinue = false; // Set the boolean variable to false to break the loop
+	        } catch (IOException e) {
+	            System.out.println("Datei ist defekt");
+	            close();
+	        }
+	    }
+
+	    return s;
+	}
+
 	
 	public void close() {
 		try {

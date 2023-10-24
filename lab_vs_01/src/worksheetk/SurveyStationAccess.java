@@ -1,12 +1,12 @@
 package worksheetk;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class SurveyStationAccess extends FileAccessViaBytes {
 	private int DATASET_LENGTH = 1002;
 	private int PRELIMINARIES = 211;
 	private ArrayList<SurveyStation> stations;
+	private int stationCount;
 	
 	public SurveyStationAccess(String fileName) {
 		super(fileName);
@@ -28,7 +28,7 @@ public class SurveyStationAccess extends FileAccessViaBytes {
 		stations = new ArrayList<SurveyStation>();
 		
 		try {
-			String prelim = this.readNBytes(PRELIMINARIES);
+			this.readNBytes(PRELIMINARIES);
 		} catch (Exception e) {
 			
 		}
@@ -59,6 +59,7 @@ public class SurveyStationAccess extends FileAccessViaBytes {
 							);
 					
 					stations.add(ss);
+					stationCount++;
 				}
 			} catch (Exception e) {
 				System.err.println(e);
@@ -72,7 +73,7 @@ public class SurveyStationAccess extends FileAccessViaBytes {
 
 		String[] result = new String[8];
 
-		String item = s.substring(0, 6);
+		String item = s.substring(0, 5);
 		result[0] = removeSpaces(item); 	//id
 
 		item = s.substring(6, 14); 
@@ -105,4 +106,12 @@ public class SurveyStationAccess extends FileAccessViaBytes {
 		String stringWithoutSpaces = s.trim();
 		return stringWithoutSpaces;
 	}
+	
+	
+	public int getStationCount() {
+		return stationCount;
+	}
+	
+	
+	
 }
