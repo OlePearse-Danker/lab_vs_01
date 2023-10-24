@@ -19,7 +19,9 @@ public class WindData {
 		this.speed = speed;
 		this.direction = direction;
 		
-		System.out.println(stationId + ", " + date + ", " + quality + ", " + speed + ", " + direction);
+		
+		// prints out all the read in data
+		// System.out.println(stationId + ", " + date + ", " + quality + ", " + speed + ", " + direction);
 		
 	}
 	

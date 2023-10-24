@@ -59,12 +59,14 @@ public class Main {
 		  );
 		  
 		  
-		  // Get Amount of WindData
-		  System.out.println("Anzahl Winddateien: " + w.getwindDataCount());
-		  
+		// Get Amount of WindData
+		  System.out.println("Anzahl Winddateien: " + String.format("%30s", w.getwindDataCount()));
+
 		  // Get DirectionAverage
-		  System.out.println("Durchschnittliche Windrichtung: " + w.getAverage("direction"));
-		  System.out.println("Durchschnittliche Windgeschwindigkeit: " + w.getAverage("speed"));
+		  System.out.println("Durchschnittliche Windrichtung: " + String.format("%30s", w.getAverage("direction")));
+
+		  // Get SpeedAverage
+		  System.out.println("Durchschnittliche Windgeschwindigkeit: " + String.format("%23s", w.getAverage("speed")));
 
 		 
        
