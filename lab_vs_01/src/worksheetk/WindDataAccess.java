@@ -8,11 +8,17 @@ public class WindDataAccess extends FileAccessViaBytes{
 	private final int PRELIMINARIES  = 43;
 	private ArrayList<WindData> data;
 	private int windDataCounter = 0;
+	private double average = 0;
+	double directionSum = 0;
+	double speedSum = 0;
+	private int negativeNumbersCount = 0;
+	
 
 	
-	public WindDataAccess(String fileName) {
+	public WindDataAccess(String fileName,String averageOf) {
 		 super(fileName);
 		 readWindData();
+		 average = calculateAverage(data, averageOf);
 		 super.close();
 	}
 	
@@ -29,7 +35,7 @@ public class WindDataAccess extends FileAccessViaBytes{
 		String buffer = "";
 		
 		while (true) {
-			
+	
 			try {
 				buffer = this.readNBytes(DATASET_LENGTH);
 			
@@ -56,8 +62,61 @@ public class WindDataAccess extends FileAccessViaBytes{
 		}
 	}
 	
+	
 	public int getwindDataCount() {
 		return windDataCounter;
+	}
+	
+	
+	public double calculateAverage(ArrayList<WindData> data, String averageOf) {
+		
+	
+		if(averageOf == "direction") {
+			
+			for (int i = 0; i < data.size(); i++) {
+				WindData wd = data.get(i);
+				double direction = wd.getDirection();
+				if (wd.getDirection() < 0) {
+					negativeNumbersCount++;
+					continue;
+				}
+				
+				directionSum += direction;
+			}
+			
+			average = (directionSum / (windDataCounter - negativeNumbersCount));
+			    
+			return average;
+			
+		}else if(averageOf == "speed") {
+			
+			for (int i = 0; i < data.size(); i++) {
+				WindData wd = data.get(i);
+				double speed = wd.getSpeed();
+				if (wd.getSpeed() < 0) {
+					negativeNumbersCount++;
+					continue;
+				}
+				
+				speedSum += speed;
+			}
+			
+			average = (speedSum / ( windDataCounter - negativeNumbersCount));
+			    
+			return average;
+			
+		}else {
+			
+			System.out.println("Geben Sie bitte eine gültigen String als Argument");
+			return 1;
+		}
+		
+		
+		
+	}
+	
+	public double getAverage() {
+		return average;
 	}
 	
 	

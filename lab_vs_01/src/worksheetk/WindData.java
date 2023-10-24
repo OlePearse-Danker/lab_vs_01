@@ -39,5 +39,13 @@ public class WindData {
 		return null;
 	}
     
+    public double getDirection() {
+    	return direction;
+    }
+    
+    public double getSpeed() {
+    	return speed;
+    }
+    
 	
 }
