@@ -57,6 +57,22 @@ public class SurveyStation {
 		return null;
 	}
     
+	public short getAltitude () {
+		return altitude;
+	}
+	
+	public double getLatitude () {
+		return latitude;
+	}
+	
+	public double getLongitude () {
+		return longitude;
+	}
+	
+	public String getStationName () {
+		return stationName;
+	}
+    
   
 }
 

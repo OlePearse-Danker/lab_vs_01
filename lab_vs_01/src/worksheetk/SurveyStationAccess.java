@@ -18,11 +18,6 @@ public class SurveyStationAccess extends FileAccessViaBytes {
 		return stations;
 	}
 	
-	public int getNumberOfSurveyStationsOf(String federalState) {
-		int zwErg = 9;
-		
-		return zwErg;
-	}
 	
 	public void readSurveyStations() {
 		stations = new ArrayList<SurveyStation>();
@@ -45,7 +40,6 @@ public class SurveyStationAccess extends FileAccessViaBytes {
 				if (buffer != null) {
 					String[] stationData = analyseString(buffer);
 					
-					// System.out.println(stationData[0]);
 
 					SurveyStation ss = new SurveyStation(
 							Short.parseShort(stationData[0]),
@@ -96,13 +90,13 @@ public class SurveyStationAccess extends FileAccessViaBytes {
 		
 		item = s.substring(102, 132);
 		result[7] = removeSpaces(item);	//bundesland	
-//		result[7] = item;
+
 		
 		return result;
 	}
 
 	private String removeSpaces(String s) {
-//		String cringe = swag.replaceAll(" ", "");
+
 		String stringWithoutSpaces = s.trim();
 		return stringWithoutSpaces;
 	}
@@ -113,5 +107,96 @@ public class SurveyStationAccess extends FileAccessViaBytes {
 	}
 	
 	
+	public int getNumberOfSurveyStations() {
+		return stations.size();
+	}
+
+	public SurveyStation findLowestStation() {
+		if (stations.isEmpty()) {
+			return null;
+		}
+
+		SurveyStation lowestStation = stations.get(0);
+
+		for (SurveyStation station : stations) {
+			if (station.getAltitude() < lowestStation.getAltitude()) {
+				lowestStation = station;
+			}
+		}
+		return lowestStation;
+	}
+
+	public SurveyStation findHighestStation() {
+		if (stations.isEmpty()) {
+			return null;
+		}
+		SurveyStation highestStation = stations.get(0);
+
+		for (SurveyStation station : stations) {
+			if (station.getAltitude() > highestStation.getAltitude()) {
+				highestStation = station;
+			}
+		}
+		return highestStation;
+	}
 	
+	public SurveyStation findNorthernmostStation() {
+		if (stations.isEmpty()) {
+			return null;
+		}
+		SurveyStation northernmostStation = stations.get(0);
+
+		for (SurveyStation station : stations) {
+			if (station.getLatitude() > northernmostStation.getLatitude()) {
+				northernmostStation = station;
+			}
+		}
+		return northernmostStation;
+	}
+	
+	public SurveyStation findSouthernmostStation() {
+	    if (stations.isEmpty()) {
+	        return null;
+	    }
+	    SurveyStation southernmostStation = stations.get(0);
+
+	    for (SurveyStation station : stations) {
+	        if (station.getLatitude() < southernmostStation.getLatitude()) {
+	            southernmostStation = station;
+	        }
+	    }
+	    return southernmostStation;
+	}
+
+	public SurveyStation findEasternmostStation() {
+	    if (stations.isEmpty()) {
+	        return null;
+	    }
+	    SurveyStation easternmostStation = stations.get(0);
+
+	    for (SurveyStation station : stations) {
+	        if (station.getLongitude() > easternmostStation.getLongitude()) {
+	            easternmostStation = station;
+	        }
+	    }
+	    return easternmostStation;
+	}
+
+	public SurveyStation findWesternmostStation() {
+	    if (stations.isEmpty()) {
+	        return null;
+	    }
+	    SurveyStation westernmostStation = stations.get(0);
+
+	    for (SurveyStation station : stations) {
+	        if (station.getLongitude() < westernmostStation.getLongitude()) {
+	            westernmostStation = station;
+	        }
+	    }
+	    return westernmostStation;
+	}
+
 }
+	
+	
+	

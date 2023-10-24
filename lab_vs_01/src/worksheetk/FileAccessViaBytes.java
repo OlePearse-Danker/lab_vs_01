@@ -24,7 +24,7 @@ public class FileAccessViaBytes {
 		}
 	}
 
-	public String readNBytes(int n) throws Exception {
+	public String readNBytes(int n) {
 	    byte[] buffer = new byte[n];
 
 	    String s = "";
@@ -37,9 +37,7 @@ public class FileAccessViaBytes {
 
 	            if (bytesRead != -1) {
 	                s = new String(buffer, StandardCharsets.UTF_8);
-	            } else {
-	                throw new Exception("EOF");
-	            }
+	            } 
 	            
 	            shouldContinue = false; // Set the boolean variable to false to break the loop
 	        } catch (IOException e) {
