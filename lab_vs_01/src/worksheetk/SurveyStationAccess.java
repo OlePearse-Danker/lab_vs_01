@@ -56,7 +56,7 @@ public class SurveyStationAccess extends FileAccessViaBytes {
 					stationCount++;
 				}
 			} catch (Exception e) {
-				System.err.println(e);
+				// System.err.println(e);
 				break;
 			}
 		}
