@@ -54,9 +54,8 @@ public class Main {
 		
 		  WindDataAccess w = new WindDataAccess(
 			// filename
-		  "/Users/olepearse-danker/git/repository/lab_vs_01/src/worksheetk/winddata.txt",
+		  "/Users/olepearse-danker/git/repository/lab_vs_01/src/worksheetk/winddata.txt"
 		  	// enter "direction"/"speed" for corresponding averageCalculation 
-		  "speed"
 		  );
 		  
 		  
@@ -64,7 +63,9 @@ public class Main {
 		  System.out.println("Anzahl Winddateien: " + w.getwindDataCount());
 		  
 		  // Get DirectionAverage
-		  System.out.println("Durchschnittliche Windrichtung: " + w.getAverage());
+		  System.out.println("Durchschnittliche Windrichtung: " + w.getAverage("direction"));
+		  System.out.println("Durchschnittliche Windgeschwindigkeit: " + w.getAverage("speed"));
+
 		 
        
         

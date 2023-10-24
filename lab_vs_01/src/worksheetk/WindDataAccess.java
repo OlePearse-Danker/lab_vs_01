@@ -8,17 +8,19 @@ public class WindDataAccess extends FileAccessViaBytes{
 	private final int PRELIMINARIES  = 43;
 	private ArrayList<WindData> data;
 	private int windDataCounter = 0;
-	private double average = 0;
+	private double averageDirection = 0;
+	private double averageSpeed = 0;
 	double directionSum = 0;
 	double speedSum = 0;
 	private int negativeNumbersCount = 0;
 	
 
 	
-	public WindDataAccess(String fileName,String averageOf) {
+	public WindDataAccess(String fileName) {
 		 super(fileName);
 		 readWindData();
-		 average = calculateAverage(data, averageOf);
+		 averageDirection = calculateAverage(data, "direction");
+		 averageSpeed = calculateAverage(data, "speed");
 		 super.close();
 	}
 	
@@ -84,9 +86,9 @@ public class WindDataAccess extends FileAccessViaBytes{
 				directionSum += direction;
 			}
 			
-			average = (directionSum / (windDataCounter - negativeNumbersCount));
+			averageDirection = (directionSum / (windDataCounter - negativeNumbersCount));
 			    
-			return average;
+			return averageDirection;
 			
 		}else if(averageOf == "speed") {
 			
@@ -101,9 +103,9 @@ public class WindDataAccess extends FileAccessViaBytes{
 				speedSum += speed;
 			}
 			
-			average = (speedSum / ( windDataCounter - negativeNumbersCount));
+			averageSpeed = (speedSum / ( windDataCounter - negativeNumbersCount));
 			    
-			return average;
+			return averageSpeed;
 			
 		}else {
 			
@@ -115,10 +117,17 @@ public class WindDataAccess extends FileAccessViaBytes{
 		
 	}
 	
-	public double getAverage() {
-		return average;
+	public double getAverage(String averageOf) {
+		if(averageOf == "direction") {
+			return averageDirection;
+		}else if (averageOf == "speed") {
+			return averageSpeed;
+		}else {
+			System.out.println("Geben Sie bitte eine gültigen String als Argument");
+			return 1;
+		}
+
 	}
-	
 	
 	
 	
