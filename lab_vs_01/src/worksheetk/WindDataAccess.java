@@ -12,6 +12,7 @@ public class WindDataAccess extends FileAccessViaBytes{
 	private double averageSpeed = 0;
 	double directionSum = 0;
 	double speedSum = 0;
+	int highWindCount = 0;
 	private int negativeNumbersCount = 0;
 	
 
@@ -21,6 +22,7 @@ public class WindDataAccess extends FileAccessViaBytes{
 		 readWindData();
 		 averageDirection = calculateAverage(data, "direction");
 		 averageSpeed = calculateAverage(data, "speed");
+		 highWindCount = calculateHighWindSpeeds(data);
 		 super.close();
 	}
 	
@@ -78,10 +80,11 @@ public class WindDataAccess extends FileAccessViaBytes{
 			for (int i = 0; i < data.size(); i++) {
 				WindData wd = data.get(i);
 				double direction = wd.getDirection();
-				if (wd.getDirection() < 0) {
-					negativeNumbersCount++;
-					continue;
-				}
+				
+					if (wd.getDirection() < 0) {
+						negativeNumbersCount++;
+						continue;
+					}
 				
 				directionSum += direction;
 			}
@@ -95,10 +98,11 @@ public class WindDataAccess extends FileAccessViaBytes{
 			for (int i = 0; i < data.size(); i++) {
 				WindData wd = data.get(i);
 				double speed = wd.getSpeed();
-				if (wd.getSpeed() < 0) {
-					negativeNumbersCount++;
-					continue;
-				}
+				
+					if (wd.getSpeed() < 0) {
+						negativeNumbersCount++;
+						continue;
+					}
 				
 				speedSum += speed;
 			}
@@ -118,10 +122,13 @@ public class WindDataAccess extends FileAccessViaBytes{
 	}
 	
 	public double getAverage(String averageOf) {
+		
 		if(averageOf == "direction") {
 			return averageDirection;
+			
 		}else if (averageOf == "speed") {
 			return averageSpeed;
+			
 		}else {
 			System.out.println("Geben Sie bitte eine gültigen String als Argument");
 			return 1;
@@ -129,6 +136,22 @@ public class WindDataAccess extends FileAccessViaBytes{
 
 	}
 	
+	public int calculateHighWindSpeeds(ArrayList<WindData> data) {
+		
+		for (int i = 0; i < data.size(); i++) {
+			
+			WindData wd2 = data.get(i);
+			
+				if (12 <= wd2.getSpeed() && wd2.getSpeed() <= 14) {
+					highWindCount++;
+				}
+		}
+		return highWindCount;
+	}
+	
+	public int getHighWindCount() {
+		return highWindCount;
+	}	
 	
 	
 

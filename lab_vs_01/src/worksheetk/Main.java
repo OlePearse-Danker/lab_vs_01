@@ -54,12 +54,11 @@ public class Main {
 		
 		  WindDataAccess w = new WindDataAccess(
 			// filename
-		  "/Users/olepearse-danker/git/repository/lab_vs_01/src/worksheetk/winddata.txt"
-		  	// enter "direction"/"speed" for corresponding averageCalculation 
-		  );
+		  "/Users/olepearse-danker/git/repository/lab_vs_01/src/worksheetk/winddata.txt");
 		  
-		  
-		// Get Amount of WindData
+		  //print spacer
+		  System.out.println();
+		  // Get Amount of WindData (30s -> minimale Breite des Strings)
 		  System.out.println("Anzahl Winddateien: " + String.format("%30s", w.getwindDataCount()));
 
 		  // Get DirectionAverage
@@ -67,6 +66,9 @@ public class Main {
 
 		  // Get SpeedAverage
 		  System.out.println("Durchschnittliche Windgeschwindigkeit: " + String.format("%23s", w.getAverage("speed")));
+		  
+		  // Number of High Winds
+		  System.out.println("Anzahl starker Winde (Stärke 12-14): " + String.format("%9s", w.getHighWindCount()));
 
 		 
        
