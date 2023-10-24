@@ -50,7 +50,7 @@ public class WindDataAccess extends FileAccessViaBytes{
 					windDataCounter++;
 				}
 			} catch (Exception e) {
-				System.err.println(e);
+				// System.err.println("I really like potatoes!");
 				break;
 			}
 		}
